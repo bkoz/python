@@ -12,6 +12,21 @@ if fileref:
 fileref.close()
 print('num_lines =', num_lines)
 
+# Write to a file.
+filename = "squared_numbers.txt"
+outfile = open(filename, "w")
 
+for number in range(1, 13):
+    square = number * number
+    outfile.write(str(square) + "\n")
 
+outfile.close()
+
+infile = open(filename, "r")
+# Read 10 chars including '\n'
+print(infile.read()[:10])
+
+fname = "squared_numbers.txt"
+with open(fname, 'r') as fileref:         # step 1
+    for lin in lines:                     # step 2
 
