@@ -145,4 +145,17 @@ for c in letter_counts.keys():
 
 print('max_value = ', max_value, "val = ", lett_d[max_value])
 
+print('\nLetter counts ...\n')
+string1 = "There is a tide in the affairs of men, Which taken at the flood, leads on to fortune. Omitted, all the voyage of their life is bound in shallows and in miseries. On such a full sea are we now afloat. And we must take the current when it serves, or lose our ventures."
+lstring = string1.lower()
+letter_counts = {} # start with an empty dictionary
+for c in lstring:
+    if c not in letter_counts:
+        # we have not seen this character before, so initialize a counter for it
+        letter_counts[c] = 0
 
+    #whether we've seen it before or not, increment its counter
+    letter_counts[c] = letter_counts[c] + 1
+
+print(string1.lower())
+print(letter_counts)
