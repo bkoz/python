@@ -3,7 +3,8 @@
 #
 # Write code to find out how many lines are in the file emotion_words.txt as shown above. 
 # Save this value to the variable num_lines. Do not use the len method.
-# baseDir='/Users/koz/src/github/python/c2/'
+baseDir='/Users/koz/src/github/python/'
+
 # fileref = open(baseDir+"./emotion_words.txt","r")
 # num_lines = 0
 # if fileref:
@@ -23,7 +24,7 @@
 # outfile.close()
 
 print('while loop ...')
-baseDir='/Users/bkozdemb/src/github.com/python/'
+#baseDir='/Users/bkozdemb/src/github.com/python/'
 filename = baseDir + 'squared_numbers.txt'
 fname = "squared_numbers.txt"
 with open(fname, 'r') as lines: 
