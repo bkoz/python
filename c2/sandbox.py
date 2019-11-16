@@ -1,30 +1,14 @@
 #
 # sandbox.py
 #
+
+#
 # Write code to find out how many lines are in the file emotion_words.txt as shown above. 
 # Save this value to the variable num_lines. Do not use the len method.
+#
 baseDir='/Users/koz/src/github/python/'
 
-# fileref = open(baseDir+"./emotion_words.txt","r")
-# num_lines = 0
-# if fileref:
-#     for aline in fileref:
-#         num_lines += 1
-# fileref.close()
-# print('num_lines =', num_lines)
-
-# Write to a file.
-# filename = "squared_numbers.txt"
-# outfile = open(filename, "w")
-
-# for number in range(1, 13):
-#     square = number * number
-#     outfile.write(str(square) + "\n")
-
-# outfile.close()
-
 print('while loop ...')
-#baseDir='/Users/bkozdemb/src/github.com/python/'
 filename = baseDir + 'squared_numbers.txt'
 fname = "squared_numbers.txt"
 with open(fname, 'r') as lines: 
