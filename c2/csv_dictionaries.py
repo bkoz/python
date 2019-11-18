@@ -6,7 +6,7 @@
 # Write code to find out how many lines are in the file emotion_words.txt as shown above. 
 # Save this value to the variable num_lines. Do not use the len method.
 #
-baseDir='/Users/koz/src/github/python/'
+baseDir='/Users/bkozdemb/src/github.com/python/'
 
 print('while loop ...')
 filename = baseDir + 'squared_numbers.txt'
@@ -144,3 +144,4 @@ for c in lstring:
 
 print(string1.lower())
 print(letter_counts)
+
