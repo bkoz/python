@@ -91,3 +91,7 @@ with open("positive_words.txt") as pos_f:
 # happy words are in the tweet), Negative Score (which is how many angry words are in the tweet), 
 # and the Net Score (how positive or negative the text is overall) for each tweet. The file 
 # should have those headers in that order.
+#
+# CSV output format
+#
+# Retweets, Number_of_Replies, Positive_Score, Negative_Score, Net_Score
