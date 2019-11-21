@@ -92,6 +92,112 @@ with open("positive_words.txt") as pos_f:
 # and the Net Score (how positive or negative the text is overall) for each tweet. The file 
 # should have those headers in that order.
 #
+
+punctuation_chars = ["'", '"', ",", ".", "!", ":", ";", '#', '@']
+
+def strip_punctuation(word):
+    """Input: A word of type string
+       Returns: The string stripped of punctuation chars.
+    """
+    strippedWord = ""
+    for c in word:
+        if c in punctuation_chars:
+            pass
+        else:
+            strippedWord = strippedWord + c
+    
+    return strippedWord
+
+def get_pos(str):
+    """ Input: A string of words.
+        Returns: An integer that represents how many
+                 positive words are contained in 
+                 the input string.
+    """
+    numPositiveWords = 0
+    # Split the string into a list then strip each
+    # word of punctuation and increment the positive
+    # word counter if the word is contained in the 
+    # list of positive words.
+    words = str.split()
+    for word in words:
+        strippedWord = strip_punctuation(word)
+        if strippedWord in positive_words:
+            numPositiveWords += 1
+    return numPositiveWords
+
+def get_neg(str):
+    """ Input: A string of words.
+        Returns: An integer that represents how many
+                 negative words are contained in 
+                 the input string.
+    """
+    numNegativeWords = 0
+    # Split the string into a list then strip each
+    # word of punctuation and increment the positive
+    # word counter if the word is contained in the 
+    # list of positive words.
+    words = str.split()
+    for word in words:
+        strippedWord = strip_punctuation(word)
+        if strippedWord in negative_words:
+            numNegativeWords += 1
+    return numNegativeWords
+
+# lists of words to use
+positive_words = []
+with open("positive_words.txt") as pos_f:
+    for lin in pos_f:
+        if lin[0] != ';' and lin[0] != '\n':
+            positive_words.append(lin.strip())
+
+
+negative_words = []
+with open("negative_words.txt") as pos_f:
+    for lin in pos_f:
+        if lin[0] != ';' and lin[0] != '\n':
+            negative_words.append(lin.strip())
+
+# 
+# Open and read the files of tweets.
+#
+
+#
+# Open output file
+# 
+outfileHandle = open("resulting_data.csv","w")
+
+# Write header to output file.
+#
+outfileHandle.write('Number of Retweets, Number of Replies, Positive Score, Negative Score, Net Score')
+outfileHandle.write('\n')    
+
+fileHandle = open("project_twitter_data.csv","r")
+lines = fileHandle.readlines()
+header = lines[0]
+field_names = header.strip().split(',')
+#print(field_names)
+for row in lines[1:]:
+    vals = row.strip().split(',')
+    tweetText = vals[0]
+    numberOfRetweets = vals[1]
+    numberOfReplies = vals[2]
+    positiveScore = get_pos(tweetText)
+    negativeScore = get_neg(tweetText)
+    netScore = int(positiveScore) - int(negativeScore)
+    rowString = ("{}, {}, {}, {}, {}".format(
+                numberOfRetweets,
+                numberOfReplies,
+                positiveScore,
+                negativeScore,
+                netScore))
+    outfileHandle.write(rowString)
+    outfileHandle.write('\n')
+
+fileHandle.close()
+outfileHandle.close()
+                  
+#print(positive_words)
 # CSV output format
 #
 # Retweets, Number_of_Replies, Positive_Score, Negative_Score, Net_Score
