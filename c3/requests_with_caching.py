@@ -35,6 +35,14 @@ def make_cache_key(baseurl, params_d, private_keys=["api_key"]):
             res.append("{}-{}".format(k, params_d[k]))
     return baseurl + "_".join(res)
 
+def requestURL(baseurl, params = {}):
+    # This function accepts a URL path and a params diction as inputs.
+    # It calls requests.get() with those inputs,
+    # and returns the full URL of the data you want to get.
+    req = requests.Request(method = 'GET', url = baseurl, params = params)
+    prepped = req.prepare()
+    return prepped.url
+
 def get(baseurl, params={}, private_keys_to_ignore=["api_key"], permanent_cache_file=PERMANENT_CACHE_FNAME, temp_cache_file=TEMP_CACHE_FNAME):
     full_url = requests.requestURL(baseurl, params)
     cache_key = make_cache_key(baseurl, params, private_keys_to_ignore)
