@@ -1,2 +1,3 @@
-api+key = 350179-umichpyt-IXUEPCY9
+tastedive_api_key = 350179-umichpyt-IXUEPCY9
+omdb_api_key = 68415c82
 
