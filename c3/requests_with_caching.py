@@ -44,12 +44,13 @@ def requestURL(baseurl, params = {}):
     return prepped.url
 
 def get(baseurl, params={}, private_keys_to_ignore=["api_key"], permanent_cache_file=PERMANENT_CACHE_FNAME, temp_cache_file=TEMP_CACHE_FNAME):
-    full_url = requests.requestURL(baseurl, params)
+    full_url = requestURL(baseurl, params)
     cache_key = make_cache_key(baseurl, params, private_keys_to_ignore)
     # Load the permanent and page-specific caches from files
     permanent_cache = _read_from_file(permanent_cache_file)
     temp_cache = _read_from_file(temp_cache_file)
     if cache_key in temp_cache:
+        print('results =', temp_cache[cache_key], full_url)
         print("found in temp_cache")
         # make a Response object containing text from the change, and the full_url that would have been fetched
         return requests.Response(temp_cache[cache_key], full_url)
@@ -61,6 +62,7 @@ def get(baseurl, params={}, private_keys_to_ignore=["api_key"], permanent_cache_
         print("new; adding to cache")
         # actually request it
         resp = requests.get(baseurl, params)
+        print('resp=', resp)
         # save it
         add_to_cache(temp_cache_file, cache_key, resp.text)
         return resp
