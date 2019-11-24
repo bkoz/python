@@ -4,7 +4,7 @@
 import requests
 import requests_cache
 
-# Install requests_cache with an expiration of 180 days.
+# Install requests_cache with no expiration.
 requests_cache.install_cache('requests_cache', expire_after=None)
 
 #
