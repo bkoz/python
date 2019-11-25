@@ -34,7 +34,7 @@ def get_related_titles(movieList):
     relatedTitles = []
     for movie in movieList:
         m = get_movies_from_tastedive(movie)
-        relatedTitleList = extract_movie_titles(get_movies_from_tastedive(m))
+        relatedTitleList = extract_movie_titles(m)
         for title in relatedTitleList:
             if title not in relatedTitles:
                 relatedTitles.append(title) 
@@ -121,4 +121,4 @@ print('\nQuestion 6 -----------------------------------------------\n')
 print(get_sorted_recommendations(["Black Panther", "Bridesmaids"]))
 #print(get_sorted_recommendations(["Black Panther"]))
 #print(get_sorted_recommendations(["Sherlock Holmes"]))
-# #print(get_sorted_recommendations(["Bridesmaids", "Sherlock Holmes"]))
+#print(get_sorted_recommendations(["Bridesmaids", "Sherlock Holmes"]))
