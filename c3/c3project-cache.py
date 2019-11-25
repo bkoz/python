@@ -33,7 +33,8 @@ def extract_movie_titles(dict):
 def get_related_titles(movieList):
     relatedTitles = []
     for movie in movieList:
-        relatedTitleList = extract_movie_titles(get_movies_from_tastedive(movie))
+        m = get_movies_from_tastedive(movie)
+        relatedTitleList = extract_movie_titles(get_movies_from_tastedive(m))
         for title in relatedTitleList:
             if title not in relatedTitles:
                 relatedTitles.append(title) 
@@ -84,9 +85,9 @@ def get_movie_rating(dict):
     return rating
 
 print('\nQuestion 5 -----------------------------------------------\n')
-print(get_movie_rating(get_movie_data("Black Panther")))
-print(get_movie_rating(get_movie_data("Sherlock Holmes")))
-print(get_movie_rating(get_movie_data("Finding Nemo")))
+#print(get_movie_rating(get_movie_data("Black Panther")))
+#print(get_movie_rating(get_movie_data("Sherlock Holmes")))
+#print(get_movie_rating(get_movie_data("Finding Nemo")))
 
 
 #
@@ -100,24 +101,18 @@ print(get_movie_rating(get_movie_data("Finding Nemo")))
 # ‘Yahşi Batı’ comes before ‘Eyyvah Eyvah’.
 
 def get_sorted_recommendations(titleList):
-    sortedTitleList = []
     ratedDict = {}
-    #print('titleList = ', titleList)
     for title in titleList:
-        #print('title =', title)
         relatedTitlesList = get_related_titles(title)
         for relatedTitle in relatedTitlesList:
             movieData = get_movie_data(relatedTitle)
-            #print('relatedTitle =', relatedTitle, 'movieData = ', movieData)
             if movieData['Response'] == 'True':
                 movieRating = get_movie_rating(movieData)
-                sortedTitleList.append(relatedTitle)
                 ratedDict[relatedTitle] = movieRating
     kys = ratedDict.keys()
-    sorted_values = sorted(kys, reverse = True, key = lambda x: ratedDict[x])
-    #print('sortedValues =', sorted_values)
+    sortedTitles = sorted(kys, reverse = True, key = lambda x: ratedDict[x])
     
-    return sorted_values
+    return sortedTitles
 
 print('\nQuestion 6 -----------------------------------------------\n')
 #print(get_movies_from_tastedive('Black Panther'))
