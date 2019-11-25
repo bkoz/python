@@ -102,13 +102,14 @@ print('\nQuestion 5 -----------------------------------------------\n')
 
 def get_sorted_recommendations(titleList):
     ratedDict = {}
-    for title in titleList:
-        relatedTitlesList = get_related_titles(title)
-        for relatedTitle in relatedTitlesList:
-            movieData = get_movie_data(relatedTitle)
-            if movieData['Response'] == 'True':
-                movieRating = get_movie_rating(movieData)
-                ratedDict[relatedTitle] = movieRating
+    #for title in titleList:
+    relatedTitlesList = get_related_titles(titleList)
+    for relatedTitle in relatedTitlesList:
+        movieData = get_movie_data(relatedTitle)
+        if movieData['Response'] == 'True':
+            movieRating = get_movie_rating(movieData)
+            ratedDict[relatedTitle] = movieRating
+    
     kys = ratedDict.keys()
     sortedTitles = sorted(kys, reverse = True, key = lambda x: ratedDict[x])
     
@@ -118,7 +119,7 @@ print('\nQuestion 6 -----------------------------------------------\n')
 #print(get_movies_from_tastedive('Black Panther'))
 # print(get_movie_data("Death Race"))
 
-print(get_sorted_recommendations(["Black Panther", "Bridesmaids"]))
+#print(get_sorted_recommendations(["Black Panther", "Bridesmaids"]))
 #print(get_sorted_recommendations(["Black Panther"]))
 #print(get_sorted_recommendations(["Sherlock Holmes"]))
-#print(get_sorted_recommendations(["Bridesmaids", "Sherlock Holmes"]))
+print(get_sorted_recommendations(["Bridesmaids", "Sherlock Holmes"]))
