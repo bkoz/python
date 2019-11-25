@@ -46,3 +46,18 @@ ids = [17573005, 17572342, 17579000, 17570002, 17572345, 17579329]
 sorted_id = sorted(ids, key=lambda x: x - 17570000)
 
 #
+
+dictionary = {"Flowers": 10, 'Trees': 20, 'Chairs': 6, "Firepit": 1, 'Grill': 2, 'Lights': 14}
+def getVal(d):
+    return dictionary[d]
+
+#print(dictionary['Flowers'])
+#print(getVal(dictionary['Flowers']))
+#sorted_values = sorted(dictionary, reverse = True, key = getVal)
+ks = dictionary.keys()
+print(ks)
+#sorted_values = sorted(dictionary, reverse = True)
+sorted_values = sorted(ks, reverse = True, key = lambda x: dictionary[x])
+
+
+print('sorted_values =', sorted_values)
