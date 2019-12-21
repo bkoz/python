@@ -19,12 +19,12 @@ import numpy as np
 # Mandelbrot - Calculates and returns an image of the Mandelbrot fractal.
 def createImage(width, height):
     size = (width, height)
-	xmin = -2 
+    xmin = -2 
     ymin = -2 
     xmax = 2
     ymax = 2
 
-	c = uint8(rand.Intn(15))
+	c = random.randrange(0, 15)
 	print("createImage: contrast = ", c)
 
     img = np.zeros(size)
@@ -45,13 +45,21 @@ def createImage(width, height):
 #              Implement color LUT using a go map type - key is based on 'n'?
 
 def mandelbrot(z complex128, contrast uint8):
-	const iterations = 200
-	var v complex128
+	"""
+	:param z: A complex number
+	:param contrast: One of 16 contrast levels (int)
+	"""
+	iterations = 200
+	v = complex()
+	black = 0
+	white = 255
 
-	for n := uint8(0); n < iterations; n++ {
+	for n in range(iterations):
 		v = v*v + z
+		# cmplx.Abs returns the absolute value (also called the modulus) of x.
+        # func Abs(x complex128) float64 { return math.Hypot(real(x), imag(x)) }
 		if cmplx.Abs(v) > 2 {
-			// return color.Gray{255 - contrast*n}
-			return palette.Plan9[255-contrast*n]
-	return color.Black
+			return 255 - (contrast * n)
+			#return palette.Plan9[255-contrast*n]
+	return black
 
