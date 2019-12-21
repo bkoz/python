@@ -1,5 +1,5 @@
 #
-# Experiment with the numpy complex data type.
+# Experiment with the complex number data type.
 #
 import cmath
 import random
