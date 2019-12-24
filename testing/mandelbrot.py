@@ -17,6 +17,14 @@ import random
 
 # img.show()
 
+def buildColorMapGradient():
+    cmap = {}
+    for i in range(256):
+        #cmap[i] = (int(r/7*255), int(g/7*255), int(b/3*255))
+        cmap[i] = (i, i, 255 - i)
+
+    return cmap
+
 def buildColorMap():
     i = 0
     cmap = {}
@@ -34,10 +42,11 @@ def createImage(width, height):
 	ymin = -2 
 	xmax = 2
 	ymax = 2
+	
 	c = random.randrange(0, 15)
 	print("createImage: contrast = ", c)
 	img = np.zeros(size, dtype=np.int8)
-	colorMap = buildColorMap()
+	colorMap = buildColorMapGradient()
 
 	for py in range(height):
 		y = float(py)/float(height)*(ymax-ymin) + ymin
@@ -54,8 +63,7 @@ def createImage(width, height):
 
 #
 # mandelbrot - Compute and return the pixel.
-#              Implement color LUT using a go map type - key is based on 'n'?
-
+#             
 def mandelbrot(z, contrast):
 	"""
 	:param z: A complex number
@@ -63,7 +71,7 @@ def mandelbrot(z, contrast):
 	"""
 	iterations = 200
 	v = complex()
-	black = 0
+	inTheSet = 0
 
 	for n in range(iterations):
 		v = v*v + z
@@ -71,8 +79,8 @@ def mandelbrot(z, contrast):
         # func Abs(x complex128) float64 { return math.Hypot(real(x), imag(x)) }
 		if complex.__abs__(v) > 2:
 			return 255 - (contrast * n)
-			#return palette.Plan9[255-contrast*n]
-	return black
 
-image = Image.fromarray(createImage(512, 512), mode='RGB')
+	return inTheSet
+
+image = Image.fromarray(createImage(1024, 1024), mode='RGB')
 image.show()

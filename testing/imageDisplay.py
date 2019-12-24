@@ -4,7 +4,7 @@ import numpy as np
 
 #img = Image.open('felix-kozdemba.jpg')
 
-def buildColorMap():
+def buildColorMap332():
     i = 0
     cmap = {}
     for r in range(8):
@@ -14,8 +14,17 @@ def buildColorMap():
                 i += 1
     return cmap
 
+def buildColorMapGradient():
+    cmap = {}
+    for i in range(256):
+        #cmap[i] = (int(r/7*255), int(g/7*255), int(b/3*255))
+        cmap[i] = (i, i, 255 - i)
+
+    return cmap
+
+
 size = (256, 256, 3)
-cm = buildColorMap()
+cm = buildColorMapGradient()
 i = np.zeros(size, dtype=np.int8)
 for y in range(size[1]):
     for x in range(size[0]):
