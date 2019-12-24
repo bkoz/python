@@ -16,9 +16,15 @@ def buildColorMap332():
 
 def buildColorMapGradient():
     cmap = {}
+    start = (0, 0, 255)
+    stop = (255, 255, 255)
+    redRange = stop[0] - start[0]
+    greenRange = stop[1] - start[1]
+    blueRange = stop[2] - start[2]
+    print('Ranges: {} {} {}'.format(redRange, greenRange, blueRange))
     for i in range(256):
         #cmap[i] = (int(r/7*255), int(g/7*255), int(b/3*255))
-        cmap[i] = (i, i, 255 - i)
+        cmap[i] = (start[0] + i, start[1] + i, start[2] - i)
 
     return cmap
 
