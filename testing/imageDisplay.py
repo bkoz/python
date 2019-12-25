@@ -14,32 +14,38 @@ def buildColorMap332():
                 i += 1
     return cmap
 
-def buildColorMapGradient():
+def buildColorMapGradient(fromC, toC):
+    """
+    Linear Interpolate between 2 colors.
+    
+    Param: fromC: The from color rgb tuple
+    Param: toC: The to color rgb tuple
+    Returns: A colormap dictionary
+    """
     cmap = {}
-    start = (0, 0, 255)
-    stop = (255, 255, 255)
-    redRange = stop[0] - start[0]
-    greenRange = stop[1] - start[1]
-    blueRange = stop[2] - start[2]
-    print('Ranges: {} {} {}'.format(redRange, greenRange, blueRange))
-    for i in range(256):
-        #cmap[i] = (int(r/7*255), int(g/7*255), int(b/3*255))
-        cmap[i] = (start[0] + i, start[1] + i, start[2] - i)
+    ranges = [0, 1, 2]
 
+    for i in range(3):
+        ranges[i] = toC[i] - fromC[i]
+
+    for i in range(256):
+        cmap[i] = (int(fromC[0] + ranges[0] * i/255),
+        int(fromC[1] + ranges[1]*i/255),
+        int(fromC[2]+ranges[2]*i/255))
+     
     return cmap
 
-
+#
+# Main
+#
 size = (256, 256, 3)
-cm = buildColorMapGradient()
+fromC=(0, 0, 255)
+toC=(255, 255, 255)
+cm = buildColorMapGradient(fromC, toC)
 i = np.zeros(size, dtype=np.int8)
 for y in range(size[1]):
     for x in range(size[0]):
             i[y][x] = cm[y]
             
-# i[0][31][0] = 255
-# i[0][31][1] = 255
-# i[0][31][2] = 255
-
 img = Image.fromarray(i, mode='RGB')
-
 img.show()

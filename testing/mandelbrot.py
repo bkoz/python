@@ -3,36 +3,25 @@ from PIL import Image
 import numpy as np
 import random
 
-#img = Image.open('felix-kozdemba.jpg')
-
-# size = (64, 64)
-# i = np.ones(size)
-# i *= 255
-# for y in range(size[1]):
-#     for x in range(size[0]):
-#         if y % 2:
-#             i[x][y] = 0
-
-# img = Image.fromarray(i)
-
-# img.show()
-
-def buildColorMapGradient():
+def buildColorMapGradient(fromC, toC):
+    """
+    Linear Interpolate between 2 colors.
+    
+    Param: fromC: The from color rgb tuple
+    Param: toC: The to color rgb tuple
+    Returns: A colormap dictionary
+    """
     cmap = {}
+    ranges = [0, 1, 2]
+
+    for i in range(3):
+        ranges[i] = toC[i] - fromC[i]
+
     for i in range(256):
-        #cmap[i] = (int(r/7*255), int(g/7*255), int(b/3*255))
-        cmap[i] = (i, i, 255 - i)
-
-    return cmap
-
-def buildColorMap():
-    i = 0
-    cmap = {}
-    for r in range(8):
-        for g in range(8):
-            for b in range(4):
-                cmap[i] = (int(r/7*255), int(g/7*255), int(b/3*255))
-                i += 1
+        cmap[i] = (int(fromC[0] + ranges[0] * i/255),
+        int(fromC[1] + ranges[1]*i/255),
+        int(fromC[2]+ranges[2]*i/255))
+     
     return cmap
 
 # Mandelbrot - Calculates and returns an image of the Mandelbrot fractal.
@@ -46,7 +35,7 @@ def createImage(width, height):
 	c = random.randrange(0, 15)
 	print("createImage: contrast = ", c)
 	img = np.zeros(size, dtype=np.int8)
-	colorMap = buildColorMapGradient()
+	colorMap = buildColorMapGradient((0, 0, 255), (255, 255, 255))
 
 	for py in range(height):
 		y = float(py)/float(height)*(ymax-ymin) + ymin
