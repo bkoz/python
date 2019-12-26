@@ -35,7 +35,7 @@ def createImage(width, height):
 	c = random.randrange(0, 15)
 	print("createImage: contrast = ", c)
 	img = np.zeros(size, dtype=np.int8)
-	colorMap = buildColorMapGradient((0, 0, 255), (255, 255, 255))
+	colorMap = buildColorMapGradient((127, 127, 127), (0, 0, 255))
 
 	for py in range(height):
 		y = float(py)/float(height)*(ymax-ymin) + ymin
