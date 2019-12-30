@@ -20,8 +20,14 @@ T = zeros(len(y), len(x))
 
 for i, b in enumerate(y):
     for j, a in enumerate(x):
-        z = complex()
-        c = complex(a, b)
+        # Mandelbrot set: c(a, b), z(0, 0)
+        # c = complex(a, b)
+        # z = complex(0, 0)
+        
+        # Julia Set: Constant c, z(a,b)
+        #c = complex('(0.285+0.01j)')
+        c = complex('(-0.8+0.156j)')
+        z = complex(a, b)
         for k in range(n):
             z = z * z + c
             if complex.__abs__(z) >= 2:
